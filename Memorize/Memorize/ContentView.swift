@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
+//struct - or structure (Not a class, not OOP)
+
+struct ContentView: View { // this struct, ContentView, behaves like a view
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -15,7 +17,11 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
             Text("Hello, world!")
         }
+        // Modifiers applied to the VStack
         .padding()
+        .font(.largeTitle)
+        .foregroundColor(.red)
+    
     }
 }
 
