@@ -10,12 +10,16 @@ import SwiftUI
 //struct - or structure (Not a class, not OOP)
 
 struct ContentView: View { // this struct, ContentView, behaves like a view
+    let emojis: Array<String> = ["👍", "👎", "👻", "🤖", "💡", "💣"]
     var body: some View {
         HStack {
-            CardView(isFaceUp: true)
-            CardView(isFaceUp: true)
-                CardView()
-                CardView()
+            ForEach(0..<4, id: \.self) {
+                index in CardView(isFaceUp: true, content: emojis[index])
+            }
+//            CardView(isFaceUp: true, content: emojis[0])
+//            CardView(isFaceUp: true, content: emojis[1])
+//            CardView(content: emojis[2])
+//            CardView(content: emojis[4])
         
         // Modifiers applied to the VStack
     
@@ -28,6 +32,7 @@ struct ContentView: View { // this struct, ContentView, behaves like a view
 
 struct CardView: View {
     @State var isFaceUp: Bool = false
+    let content: String
     var body: some View {
         ZStack {
             let base = RoundedRectangle(cornerRadius: 12.0)
@@ -35,9 +40,10 @@ struct CardView: View {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2.0)
                     
-                Text("👍")
+                Text(content)
                     .font(.largeTitle)
-                    .padding()
+                    .foregroundColor(.black)
+        
             } else {
                 base.fill()
                     
