@@ -10,19 +10,32 @@ import SwiftUI
 //struct - or structure (Not a class, not OOP)
 
 struct ContentView: View { // this struct, ContentView, behaves like a view
-    let emojis: Array<String> = ["👍", "👎", "👻", "🤖", "💡", "💣"]
+    let emojis: Array<String> = ["👻", "🤖", "💡", "💣", "🍏", "🍅", "🚗"]
+    @State var cardCount: Int = 4
     var body: some View {
-        HStack {
-            ForEach(emojis.indices, id: \.self) {
-                index in CardView(isFaceUp: true, content: emojis[index])
+        VStack {
+            HStack {
+                ForEach(0..<cardCount, id: \.self) {
+                    index in CardView(isFaceUp: true, content: emojis[index])
+                }
             }
-    }
-        // Modifiers applied to the VStack
-        .foregroundColor(.orange)
-        .padding()
+            HStack {
+                Button("Add Card") {
+                    cardCount += 1
+                }
+                
+                Button("Remove Card") {
+                    cardCount -= 1
+                }
+            }
+            }
+            // Modifiers applied to the VStack
+            .foregroundColor(.orange)
+            .padding()
+        }
     
     }
-}
+
 
 struct CardView: View {
     @State var isFaceUp: Bool = false
