@@ -13,17 +13,11 @@ struct ContentView: View { // this struct, ContentView, behaves like a view
     let emojis: Array<String> = ["👍", "👎", "👻", "🤖", "💡", "💣"]
     var body: some View {
         HStack {
-            ForEach(0..<4, id: \.self) {
+            ForEach(emojis.indices, id: \.self) {
                 index in CardView(isFaceUp: true, content: emojis[index])
             }
-//            CardView(isFaceUp: true, content: emojis[0])
-//            CardView(isFaceUp: true, content: emojis[1])
-//            CardView(content: emojis[2])
-//            CardView(content: emojis[4])
-        
-        // Modifiers applied to the VStack
-    
     }
+        // Modifiers applied to the VStack
         .foregroundColor(.orange)
         .padding()
     
