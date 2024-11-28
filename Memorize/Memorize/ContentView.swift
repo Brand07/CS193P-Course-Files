@@ -23,18 +23,22 @@ struct ContentView: View { // this struct, ContentView, behaves like a view
             HStack {
                 
                 Button(action: {
-                    cardCount += 1
+                    if cardCount < emojis.count {
+                        cardCount += 1
+                    }
                 }, label: {
-                    Image(systemName: "rectangle.stack.badge.plus")
+                    Image(systemName: "rectangle.stack.badge.plus.fill")
                 })
                 .imageScale(.large)
                 
                 Spacer()
                 
                 Button(action: {
-                    cardCount -= 1
+                    if cardCount > 1 {
+                        cardCount -= 1
+                    }
                 }, label: {
-                    Image(systemName: "rectangle.stack.badge.minus")
+                    Image(systemName: "rectangle.stack.badge.minus.fill")
                 })
                 .imageScale(.large)
             }
