@@ -19,18 +19,27 @@ struct ContentView: View { // this struct, ContentView, behaves like a view
                     index in CardView(isFaceUp: true, content: emojis[index])
                 }
             }
+            .foregroundColor(.orange)
             HStack {
-                Button("Add Card") {
-                    cardCount += 1
-                }
                 
-                Button("Remove Card") {
+                Button(action: {
+                    cardCount += 1
+                }, label: {
+                    Image(systemName: "rectangle.stack.badge.plus")
+                })
+                .imageScale(.large)
+                
+                Spacer()
+                
+                Button(action: {
                     cardCount -= 1
-                }
+                }, label: {
+                    Image(systemName: "rectangle.stack.badge.minus")
+                })
+                .imageScale(.large)
             }
             }
             // Modifiers applied to the VStack
-            .foregroundColor(.orange)
             .padding()
         }
     
