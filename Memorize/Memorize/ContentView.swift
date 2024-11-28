@@ -1,9 +1,4 @@
-//
-//  ContentView.swift
-//  Memorize
-//
-//  Created by Brandon Yates on 11/26/24.
-//
+
 
 import SwiftUI
 
@@ -12,40 +7,56 @@ import SwiftUI
 struct ContentView: View { // this struct, ContentView, behaves like a view
     let emojis: Array<String> = ["👻", "🤖", "💡", "💣", "🍏", "🍅", "🚗"]
     @State var cardCount: Int = 4
+    
     var body: some View {
         VStack {
-            HStack {
-                ForEach(0..<cardCount, id: \.self) {
-                    index in CardView(isFaceUp: true, content: emojis[index])
-                }
-            }
-            .foregroundColor(.orange)
-            HStack {
-                
-                Button(action: {
-                    if cardCount < emojis.count {
-                        cardCount += 1
-                    }
-                }, label: {
-                    Image(systemName: "rectangle.stack.badge.plus.fill")
-                })
-                .imageScale(.large)
-                
-                Spacer()
-                
-                Button(action: {
-                    if cardCount > 1 {
-                        cardCount -= 1
-                    }
-                }, label: {
-                    Image(systemName: "rectangle.stack.badge.minus.fill")
-                })
-                .imageScale(.large)
-            }
-            }
+            cards
+            cardCounters
+            
+        }
             // Modifiers applied to the VStack
             .padding()
+    }
+    
+    
+    var cardAdder: some View {
+        return cardCountAdjuster(by: 1, symbol: "rectangle.stack.badge.plus.fill")
+    }
+    
+    var cardRemover: some View {
+        return cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
+    }
+    
+    
+    func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
+        Button(action: {
+            cardCount += offset
+        }, label: {
+            Image(systemName: symbol)
+        })
+        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
+    }
+    
+    var cards: some View {
+        HStack {
+            ForEach(0..<cardCount, id: \.self) {
+                index in CardView(isFaceUp: true, content: emojis[index])
+            }
+            .imageScale(.large)
+            .font(.largeTitle)
         }
+        
+        
+
+    }
+    
+    var cardCounters: some View {
+        HStack {
+            cardAdder
+            Spacer()
+            cardRemover
+        }
+    }
     
     }
 
